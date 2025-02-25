@@ -75,8 +75,8 @@ export const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
             {
-                path: "/",
-                element: <Home />
+                path: "/dashboard",
+                element: <Home  />
             },
             {
                 path: "/dashboards/analytics",
@@ -115,7 +115,7 @@ export const router = createBrowserRouter([
                 element: <ProposalCreate />
             },
             {
-                path: "/payment/list",
+                path: "/users",
                 element: <PaymentList />
             },
             {
@@ -282,11 +282,11 @@ export const router = createBrowserRouter([
         element: <LayoutAuth />,
         children: [
             {
-                path: "/authentication/login/cover",
+                path: "/login",
                 element: <LoginCover />
             },
             {
-                path: "/authentication/login/minimal",
+                path: "/login/minimal",
                 element: <LoginMinimal />
             },
             {
@@ -306,7 +306,7 @@ export const router = createBrowserRouter([
                 element: <RegisterCreative />
             },
             {
-                path: "/authentication/reset/cover",
+                path: "/forgot-password",
                 element: <ResetCover />
             },
             {

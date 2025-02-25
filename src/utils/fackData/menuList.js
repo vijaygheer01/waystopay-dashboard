@@ -2,7 +2,7 @@ export const menuList = [
     {
         id: 0,
         name: "dashboards",
-        path: "/",
+        path: "/dashboard",
         icon: 'feather-airplay',
         dropdownMenu: [
         ]
@@ -10,14 +10,14 @@ export const menuList = [
     {
         id: 1,
         name: "Users",
-        path: "#",
+        path: "/users",
         icon: 'feather-cast',
         dropdownMenu: []
     },
     {
         id: 2,
         name: "Transactions",
-        path: '#',
+        path: "/transactions",
         icon: 'feather-send',
         dropdownMenu: [
            

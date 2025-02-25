@@ -1,12 +1,14 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const LayoutAuth = () => {
-    return (
-        <>
-            <Outlet />
-        </>
-    )
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    if(isAuthenticated){
+        return <Navigate to="/dashboard" />;
+    }
+    
+    return (<><Outlet /></>)
 }
 
 export default LayoutAuth
