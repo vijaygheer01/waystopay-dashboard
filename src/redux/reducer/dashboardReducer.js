@@ -28,12 +28,25 @@ export const userIndex = createAsyncThunk(
   }
 );
 
+export const getUserDetails = createAsyncThunk(
+  "user/details",
+  async (arg, thunkAPI) => {
+    return await clientWithToken.get(`/user/${arg}`)
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((err) => {
+      return err;
+    });
+  }
+);
 
   let initialState = {
     dashboard: null,
     isLoading: false,
     error: null,
     users: null,
+    userDetails: null,
   };
 
   export const dashboardSlice = createSlice({
@@ -57,7 +70,14 @@ export const userIndex = createAsyncThunk(
         state.isLoading = false;
         state.users = action.payload;
       });
-    },
+      builder.addCase(getUserDetails.pending, (state, action) => {
+        state.isLoading = true;
+      });
+      builder.addCase(getUserDetails.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userDetails = action.payload;
+      });
+    }
   });
 
 

@@ -18,7 +18,7 @@ const actions = [
 ];
 
 
-const PaymentTable = ({ users }) => {
+const UserTable = ({ users }) => {
   const columns = [
     {
       accessorKey: '_id',
@@ -55,54 +55,82 @@ const PaymentTable = ({ users }) => {
       },
     },
 
-    {
-      accessorKey: '_id',
-      header: () => 'User ID',
-      cell: (info) => <a href='#' className='fw-bold'>{info.getValue()}</a>
-    },
+    
     {
       accessorKey: 'firstName',
-      header: () => 'Client',
+      header: () => 'User',
       cell: (info) => {
-        const roles = info.getValue();
+        const firstName = info.row.original.firstName;
+        const lastName = info.row.original.lastName;
+        const email = info.row.original.email;
         return (
-          <a href="#" className="hstack gap-3">
+          <Link to={`/user/${info.row.original._id}`} className="hstack gap-3">
             {
-              roles?.img ?
-                <div className="avatar-image avatar-md">
-                  <img src={roles?.img} alt="" className="img-fluid" />
-                </div>
-                :
-                <div className="text-white avatar-text user-avatar-text avatar-md">{roles.substring(0, 1)}</div>
+
+                <div className="text-white avatar-text user-avatar-text avatar-md">{firstName.substring(0, 1)}</div>
             }
             <div>
-              <span className="text-truncate-1-line">{roles}</span>
-              <small className="fs-12 fw-normal text-muted">{roles}</small>
+              <span className="text-truncate-1-line">{firstName} {lastName}</span>
+              <small className="fs-12 fw-normal text-muted">{email}</small>
             </div>
-          </a>
+          </Link>
         )
       }
     },
+    {
+      accessorKey: 'address',
+      header: () => 'Address',
+      cell: (info) => {
+        const address = info.row.original.address1;
+        const city = info.row.original.city;
+        const state = info.row.original.state;
+        const postalCode = info.row.original.postalCode;
+        return (
+          <span className="hstack gap-3">
+            <div>
+              <span className="text-truncate-1-line">{address}</span>
+              <small className="fs-12 fw-normal text-muted">{city}, {state} {postalCode}</small>
+            </div>
+          </span>
+        )
+      }
+    },
+    {
+      accessorKey: 'dateOfBirth',
+      header: () => 'Date of Birth',
+      cell: (info) => <span className="fs-12 fw-normal text-muted">{ 
+      new Date(info.getValue()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      }</span>
+    },
 
-    {
-      accessorKey: 'createdAt',
-      header: () => 'Date',
-    },
-    {
-      accessorKey: 'transaction',
-      header: () => 'Transaction',
-      cell: (info) => <a href=''>{info.getValue()}</a>
-    },
+
+    
     {
       accessorKey: 'type',
-      header: () => 'type'
+      header: () => 'Account Type',
+      cell: (info) => <a href='#' className='fw-bold badge bg-light text-dark text-capitalize'>{info.getValue()}</a>,
+      meta: {
+        headerClassName: 'text-end'
+      }
+    },
+    {
+      accessorKey: 'ssn',
+      header: () => 'SSN',
+      cell: (info) => <span className="fs-12 fw-normal text-muted text-capitalize badge bg-light text-dark">{info.getValue()}</span>
+    },  
+    {
+      accessorKey: 'createdAt',
+      header: () => 'Created At',
+      cell: (info) => <span className="fs-12 fw-normal text-muted">{ 
+      new Date(info.getValue()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      }</span>
     },
     {
       accessorKey: 'actions',
       header: () => "Actions",
       cell: info => (
         <div className="hstack gap-2 justify-content-end">
-          <Link to="/payment/view" className="avatar-text avatar-md">
+          <Link to={`/user/${info.row.original._id}`} className="avatar-text avatar-md">
             <FiEye />
           </Link>
           <Dropdown dropdownItems={actions} triggerIcon={<FiMoreHorizontal />} triggerClass='avatar-md' triggerPosition={"0,21"} />
@@ -123,4 +151,4 @@ const PaymentTable = ({ users }) => {
   )
 }
 
-export default PaymentTable
+export default UserTable

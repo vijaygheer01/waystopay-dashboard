@@ -3,6 +3,7 @@ import { FiAlertTriangle } from 'react-icons/fi'
 import { projectsData } from '@/utils/fackData/projectsData'
 import ImageGroup from '@/components/shared/ImageGroup'
 import HorizontalProgress from '@/components/shared/HorizontalProgress';
+import { useSelector } from 'react-redux';
 
 const informationData = [
     { label: 'Full Name', value: 'Alexandra Della' },
@@ -19,6 +20,7 @@ const informationData = [
     { label: 'Website', value: 'https://themeforest.net/user/theme_ocean' },
 ];
 const TabOverviewContent = () => {
+    const { userDetails } = useSelector((state) => state.dashboard);
     return (
         <div
             className="tab-pane fade show active p-4"

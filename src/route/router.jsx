@@ -69,7 +69,7 @@ import WidgetsCharts from "../pages/widgets-charts";
 import WidgetsStatistics from "../pages/widgets-statistics";
 import WidgetsMiscellaneous from "../pages/widgets-miscellaneous";
 import UserList from "../pages/user-list";
-
+import UserView from "../pages/user-view";
 
 
 
@@ -89,6 +89,10 @@ export const router = createHashRouter([
             {
                 path: "/users",
                 element: <UserList />
+            },
+            {
+                path: "/user/:id",
+                element: <UserView />
             },
             {
                 path: "/dashboards/analytics",
