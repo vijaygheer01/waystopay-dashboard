@@ -4,7 +4,7 @@ import TablePagination from './TablePagination'
 import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
 import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 
-const Table = ({data, columns}) => {
+const Table = ({data, columns, total}) => {
     // const [data] = useState([...fackData])
     const [sorting, setSorting] = useState([])
     const [globalFilter, setGlobalFilter] = useState('')
@@ -101,7 +101,7 @@ const Table = ({data, columns}) => {
                                 </div>
                             </div>
 
-                            <TablePagination table={table} />
+                            <TablePagination  total={total} table={table} />
                         </div>
                     </div>
                 </div>

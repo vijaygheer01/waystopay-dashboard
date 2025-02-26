@@ -69,7 +69,7 @@ export const paymentRecordChartOption = () => {
         yaxis: {
             labels: {
                 formatter: function (e) {
-                    return +e + "K"
+                    return +e
                 },
                 offsetX: 0,
                 offsetY: 0,
@@ -103,7 +103,7 @@ export const paymentRecordChartOption = () => {
             // inverseOrder: !0,
             y: {
                 formatter: function (e) {
-                    return +e + "K"
+                    return +e
                 }
             },
             style: {

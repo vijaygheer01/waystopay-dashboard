@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter,createHashRouter, } from "react-router-dom";
 import RootLayout from "../layout/root";
 import Home from "../pages/home";
 import Analytics from "../pages/analytics";
@@ -68,15 +68,27 @@ import WidgetsTables from "../pages/widgets-tables";
 import WidgetsCharts from "../pages/widgets-charts";
 import WidgetsStatistics from "../pages/widgets-statistics";
 import WidgetsMiscellaneous from "../pages/widgets-miscellaneous";
+import UserList from "../pages/user-list";
 
-export const router = createBrowserRouter([
+
+
+
+export const router = createHashRouter([
     {
         path: "/",
         element: <RootLayout />,
         children: [
             {
+                path: "/",
+                element: <Home  />
+            },
+            {
                 path: "/dashboard",
                 element: <Home  />
+            },
+            {
+                path: "/users",
+                element: <UserList />
             },
             {
                 path: "/dashboards/analytics",

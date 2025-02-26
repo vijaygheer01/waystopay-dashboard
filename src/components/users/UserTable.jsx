@@ -21,7 +21,7 @@ const actions = [
 const PaymentTable = ({ users }) => {
   const columns = [
     {
-      accessorKey: 'id',
+      accessorKey: '_id',
       header: ({ table }) => {
         const checkboxRef = React.useRef(null);
 
@@ -56,12 +56,12 @@ const PaymentTable = ({ users }) => {
     },
 
     {
-      accessorKey: 'invoice',
-      header: () => 'Invoice',
+      accessorKey: '_id',
+      header: () => 'User ID',
       cell: (info) => <a href='#' className='fw-bold'>{info.getValue()}</a>
     },
     {
-      accessorKey: 'client',
+      accessorKey: 'firstName',
       header: () => 'Client',
       cell: (info) => {
         const roles = info.getValue();
@@ -73,25 +73,19 @@ const PaymentTable = ({ users }) => {
                   <img src={roles?.img} alt="" className="img-fluid" />
                 </div>
                 :
-                <div className="text-white avatar-text user-avatar-text avatar-md">{roles?.name.substring(0, 1)}</div>
+                <div className="text-white avatar-text user-avatar-text avatar-md">{roles.substring(0, 1)}</div>
             }
             <div>
-              <span className="text-truncate-1-line">{roles?.name}</span>
-              <small className="fs-12 fw-normal text-muted">{roles?.email}</small>
+              <span className="text-truncate-1-line">{roles}</span>
+              <small className="fs-12 fw-normal text-muted">{roles}</small>
             </div>
           </a>
         )
       }
     },
+
     {
-      accessorKey: 'amount',
-      header: () => 'Amount',
-      meta: {
-        className: "fw-bold text-dark"
-      }
-    },
-    {
-      accessorKey: 'date',
+      accessorKey: 'createdAt',
       header: () => 'Date',
     },
     {
@@ -100,9 +94,8 @@ const PaymentTable = ({ users }) => {
       cell: (info) => <a href=''>{info.getValue()}</a>
     },
     {
-      accessorKey: 'status',
-      header: () => 'Status',
-      cell: (info) => <div className={`badge ${info.getValue().color}`}>{info.getValue().content}</div>
+      accessorKey: 'type',
+      header: () => 'type'
     },
     {
       accessorKey: 'actions',
@@ -120,9 +113,12 @@ const PaymentTable = ({ users }) => {
       }
     },
   ]
+
+
+
   return (
     <>
-      <Table data={paymentTableData} columns={columns} />
+      <Table data={users.users} columns={columns} total={users.users.length} />
     </>
   )
 }

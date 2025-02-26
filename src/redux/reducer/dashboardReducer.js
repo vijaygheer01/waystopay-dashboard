@@ -15,9 +15,25 @@ export const dashboardIndex = createAsyncThunk(
   }
 );
 
+export const userIndex = createAsyncThunk(
+  "user/index",
+  async (arg, thunkAPI) => {
+    return await clientWithToken.get('/users',arg)
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((err) => {
+      return err;
+    });
+  }
+);
+
 
   let initialState = {
     dashboard: null,
+    isLoading: false,
+    error: null,
+    users: null,
   };
 
   export const dashboardSlice = createSlice({
@@ -27,7 +43,20 @@ export const dashboardIndex = createAsyncThunk(
      
     },
     extraReducers: (builder) => {
-     
+      builder.addCase(dashboardIndex.pending, (state, action) => {
+        state.isLoading = true;
+      });
+      builder.addCase(dashboardIndex.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.dashboard = action.payload;
+      });
+      builder.addCase(userIndex.pending, (state, action) => {
+        state.isLoading = true;
+      });
+      builder.addCase(userIndex.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.users = action.payload;
+      });
     },
   });
 
