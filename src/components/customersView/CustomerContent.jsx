@@ -12,24 +12,15 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetails } from '@/redux/reducer/dashboardReducer';
 
-const CustomerContent = () => {
+const CustomerContent = ({userDetails}) => {
 
-    const { id } = useParams();
-
-    const dispatch = useDispatch();
-    const { userDetails, isLoading } = useSelector((state) => state.dashboard);
-
-    useEffect(() => {
-        dispatch(getUserDetails(id));
-    }, [dispatch, id]);
-
-    console.log('userDetails', userDetails);
+  
 
 
     return (
         <>
             <div className="col-xxl-4 col-xl-6">
-                <Profile user={userDetails.user} />
+                <Profile user={userDetails.user} walletBalance={userDetails?.balance} />
             </div>
             <div className="col-xxl-8 col-xl-6">
                 <div className="card border-top-0">
@@ -53,11 +44,9 @@ const CustomerContent = () => {
                     <div className="tab-content">
                         <TabOverviewContent />
                         <div className="tab-pane fade" id="billingTab" role="tabpanel">
-                            <TabBillingContent billingHistoryshow={true} />
+                            <TabBillingContent transactions={userDetails?.transaction} defaultFundingSource={userDetails?.user?.defaultBankAccountId} billingHistoryshow={true} fundingSources={userDetails?.fundingSources} />
                         </div>
-                        <TabActivityContent />
-                        <TabNotificationsContent />
-                        <TabConnections />
+                        <TabActivityContent history={userDetails?.transaction} />
 
                     </div>
                 </div>

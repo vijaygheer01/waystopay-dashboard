@@ -11,8 +11,8 @@ const LoginForm = ({ registerPath, resetPath }) => {
     const navigate = useNavigate();
 
     const [error,setError] = useState('');
-    const [email,setEmail] = useState('vijaygheer01@gmail.com');
-    const [password,setPassword] = useState('6739391918');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();

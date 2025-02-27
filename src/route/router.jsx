@@ -70,6 +70,7 @@ import WidgetsStatistics from "../pages/widgets-statistics";
 import WidgetsMiscellaneous from "../pages/widgets-miscellaneous";
 import UserList from "../pages/user-list";
 import UserView from "../pages/user-view";
+import Transactions from "../pages/transactions";
 
 
 
@@ -93,6 +94,10 @@ export const router = createHashRouter([
             {
                 path: "/user/:id",
                 element: <UserView />
+            },
+            {
+                path: "/transactions",
+                element: <Transactions />
             },
             {
                 path: "/dashboards/analytics",
@@ -202,6 +207,7 @@ export const router = createHashRouter([
                 path: "/help/knowledgebase",
                 element: <HelpKnowledgebase />
             },
+           
 
         ]
     },

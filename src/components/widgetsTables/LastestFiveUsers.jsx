@@ -10,7 +10,7 @@ import CardLoader from '@/components/shared/CardLoader'
 const LatestFiveUsers = ({title,data}) => {
     const { refreshKey, isRemoved, isExpanded, handleRefresh, handleExpand, handleDelete } = useCardTitleActions();
 
-    const users = data.lastFiveUsers
+    const users = data?.lastFiveUsers || []
 
 
     if (isRemoved) {

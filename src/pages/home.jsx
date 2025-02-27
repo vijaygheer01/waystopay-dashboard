@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import LeadsOverviewChart from '@/components/widgetsCharts/LeadsOverviewChart'
 import LatestLeads from '@/components/widgetsTables/LatestLeads'
 import Schedule from '@/components/widgetsList/Schedule'
@@ -17,15 +17,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dashboardIndex } from '../redux/reducer/dashboardReducer';
 import LatestFiveUsers from '@/components/widgetsTables/LastestFiveUsers'
 import LatestFiveTrans from '@/components/widgetsTables/LastestFiveTrans'
+import Loading from '@/components/shared/Loading'
 const Home = () => {
-    const { dashboard, isLoading, error } = useSelector((state) => state.dashboard);
+    const { dashboard, error } = useSelector((state) => state.dashboard);
+    const [isLoading, setIsLoading] = useState(true);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(dashboardIndex());
+        dispatch(dashboardIndex())
+
     }, [dispatch]);
 
-    console.log('dashboard',dashboard);
+    useEffect(() => {
+        if(dashboard){
+            setIsLoading(false);
+        }
+    }, [dashboard]);
+
+    if(isLoading){ return <Loading /> }
+
+
 
 
 
@@ -42,12 +54,6 @@ const Home = () => {
                     <LatestFiveTrans data={dashboard} title={"Last 5 Transactions"} />
                     <LatestFiveUsers data={dashboard} title={"Last 5 Users"} />
 
-                    {/* <SalesMiscellaneous isFooterShow={true} dataList={projectsDataTwo} /> */}
-                    {/* <TasksOverviewChart /> */}
-                    {/* <LeadsOverviewChart chartHeight={315} /> */}
-                    {/* <Schedule title={"Upcoming Schedule"} /> */}
-                    {/* <Project cardYSpaceClass="hrozintioal-card" borderShow={true} title="Project Status" /> */}
-                    {/* <TeamProgress title={"Team Progress"} footerShow={true} /> */}
                 </div>
             </div>
             <Footer />

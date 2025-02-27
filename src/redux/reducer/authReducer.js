@@ -59,7 +59,11 @@ export const authLogout = createAsyncThunk(
     reducers: {
       setUserId: (state, action) => {
         state.userId = action.payload;
+      },
+      setIsAuthenticatedFalse: (state, action) => {
+        state.isAuthenticated = false;
       }
+
     },
     extraReducers: (builder) => {
       builder.addCase(authLogin.fulfilled, (state, action) => {
@@ -81,7 +85,7 @@ export const authLogout = createAsyncThunk(
   });
 
 
-  export const { setUserId } = authSlice.actions;
+  export const { setUserId, setIsAuthenticatedFalse } = authSlice.actions;
 
   export default authSlice.reducer;
 

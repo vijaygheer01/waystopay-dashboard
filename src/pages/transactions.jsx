@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from 'react'
 
 import Footer from '@/components/shared/Footer'
-import UserTable from '@/components/users/UserTable'
-import UserHeader from '@/components/users/UserHeader'
+import TransactionTable from '@/components/Transaction/TransactionsTable'
+import TransactionHeader from '@/components/Transaction/TransactionsHeader'
 import PageHeader from '@/components/shared/pageHeader/PageHeader'
 
 import { useDispatch, useSelector } from 'react-redux';
-import { userIndex } from '@/redux/reducer/dashboardReducer';
+import { getTransactions } from '@/redux/reducer/dashboardReducer';
 import Loading from '@/components/shared/Loading';
 
-const UserList = () => {
+const Transactions = () => {
 
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
-    const { users } = useSelector((state) => state.dashboard);
+    const { transactions } = useSelector((state) => state.dashboard);
 
     useEffect(() => {
-        dispatch(userIndex());
+        dispatch(getTransactions());
     }, [dispatch]);
 
     useEffect(() => {
-        if(users){
+        if(transactions){
             setIsLoading(false);
         }
-    }, [users]);
-    console.log('users', users);
+    }, [transactions]);
+    console.log('transactions', transactions);
 
     if(isLoading){
         return <Loading />
@@ -36,11 +36,11 @@ const UserList = () => {
     return (
         <>
             <PageHeader>
-                <UserHeader />
+                <TransactionHeader />
             </PageHeader>
             <div className='main-content'>
                 <div className='row'>
-                    <UserTable users={users} />
+                    <TransactionTable transactions={transactions?.transactions} />
                 </div>
             </div>
             <Footer/>
@@ -48,4 +48,4 @@ const UserList = () => {
     )
 }
 
-export default UserList
+export default Transactions
