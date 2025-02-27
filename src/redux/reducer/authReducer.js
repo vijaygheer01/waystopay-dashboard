@@ -43,6 +43,19 @@ export const authLogout = createAsyncThunk(
   }
 );
 
+export const authChangePassword = createAsyncThunk(
+  "auth/change-password",
+  async (arg, thunkAPI) => {
+    return await clientWithToken.post('/change-password',arg)
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((err) => {
+      return err;
+    });
+  }
+);
+
 
   let initialState = {
     isAuthenticated: false,

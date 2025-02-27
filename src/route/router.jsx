@@ -100,6 +100,10 @@ export const router = createHashRouter([
                 element: <Transactions />
             },
             {
+                path: "/settings",
+                element: <SettingsGaneral />
+            },
+            {
                 path: "/dashboards/analytics",
                 element: <Analytics />
             },

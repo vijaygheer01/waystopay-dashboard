@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InputTopLabel = ({ label, info, type = "text", placeholder, isRequired, isOptional, className="mb-5" }) => {
+const InputTopLabel = ({ label, info, type = "text", placeholder, isRequired, isOptional, className="mb-5", value, onChange,disabled,error }) => {
     return (
         <div className={`${className}`}>
             <label className="form-label">
@@ -8,7 +8,7 @@ const InputTopLabel = ({ label, info, type = "text", placeholder, isRequired, is
                 {isRequired ? <span className="text-danger">*</span> : ""}
                 {isOptional ? <span className="fw-normal text-muted text-capitalize"> (Optional)</span> : ""}
             </label>
-            <input type={type} className="form-control" placeholder={placeholder} />
+            <input type={type} className="form-control" placeholder={placeholder} value={value} onChange={onChange} disabled={disabled} />
             <small className="form-text text-muted">{info}</small>
         </div>
     )
